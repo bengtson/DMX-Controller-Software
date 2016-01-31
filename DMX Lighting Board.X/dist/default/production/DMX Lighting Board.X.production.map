@@ -1,0 +1,139 @@
+MPLINK 5.08, LINKER
+Linker Map File - Created Sun Jan 31 12:51:45 2016
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_1       code   0x000000    program   0x000002
+                   .cinit    romdata   0x000001    program   0x000004
+                   .org_2       code   0x000004    program   0x000002
+                   .org_0       code   0x000020    program   0x000010
+                   .org_3       code   0x000040    program   0x000340
+.config_8007_BUILD/DEFAULT/PRODUCTION/DMXPACK       code   0x008007    program   0x000002
+.config_8008_BUILD/DEFAULT/PRODUCTION/DMXPACK       code   0x008008    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000002      
+                            0x000004    0x000004      
+                            0x000020    0x000027      
+                            0x000040    0x0001df      
+                            0x008007    0x008008      
+            430 out of 4103 program addresses used, program memory utilization is 10%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+       CHANNEL_ADD_0_HIGH   0x000021    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+        CHANNEL_ADD_0_LOW   0x000020    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+       CHANNEL_ADD_1_HIGH   0x000023    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+        CHANNEL_ADD_1_LOW   0x000022    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+       CHANNEL_ADD_2_HIGH   0x000025    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+        CHANNEL_ADD_2_LOW   0x000024    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+       CHANNEL_ADD_3_HIGH   0x000027    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+        CHANNEL_ADD_3_LOW   0x000026    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+                     boot   0x0001bc    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+    channel_address_table   0x000020    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+          comparator_init   0x000094    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+           comparator_isr   0x0000b3    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+                 dmx_init   0x000057    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+                     main   0x0001cb    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+                    main2   0x0001cd    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+                   mainlp   0x0001d0    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+                 pwm_init   0x000192    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+                  pwm_off   0x000199    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+         pwm_set_channels   0x0001a3    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+      pwm_set_channels_ok   0x0001a7    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+                 pwm_sync   0x00019f    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+              system_halt   0x000056    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+              system_init   0x000040    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+               system_isr   0x000053    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+        system_isr_return   0x000055    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+             system_start   0x00004f    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+               timer_init   0x000154    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+                timer_isr   0x00016b    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+         timer_isr_return   0x000184    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+         timer_isr_setpwm   0x000183    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+               timer_zero   0x000185    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+                   txloop   0x0001db    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+                uart_init   0x0000bc    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+                 uart_isr   0x0000d0    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+          uart_isr_return   0x000153    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+         uart_state_break   0x0000d8    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+ uart_state_break_discard   0x0000e2    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+    uart_state_check_data   0x000100    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+   uart_state_check_start   0x0000e4    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+          uart_state_data   0x000105    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+     uart_state_data_dmx1   0x000117    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+     uart_state_data_dmx2   0x000122    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+     uart_state_data_dmx3   0x00012d    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+    uart_state_data_frame   0x00014b    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+      uart_state_data_inc   0x000138    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+    uart_state_data_noinc   0x00013c    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+         uart_state_error   0x00014f    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+         uart_state_start   0x0000e9    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+    uart_state_start_data   0x0000ee    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+uart_state_start_detected   0x0000f5    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+        CHANNEL_ADD_0_LOW   0x000020    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+    channel_address_table   0x000020    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+       CHANNEL_ADD_0_HIGH   0x000021    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+        CHANNEL_ADD_1_LOW   0x000022    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+       CHANNEL_ADD_1_HIGH   0x000023    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+        CHANNEL_ADD_2_LOW   0x000024    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+       CHANNEL_ADD_2_HIGH   0x000025    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+        CHANNEL_ADD_3_LOW   0x000026    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+       CHANNEL_ADD_3_HIGH   0x000027    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+              system_init   0x000040    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+             system_start   0x00004f    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+               system_isr   0x000053    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+        system_isr_return   0x000055    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+              system_halt   0x000056    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+                 dmx_init   0x000057    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+          comparator_init   0x000094    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+           comparator_isr   0x0000b3    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+                uart_init   0x0000bc    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+                 uart_isr   0x0000d0    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+         uart_state_break   0x0000d8    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+ uart_state_break_discard   0x0000e2    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+   uart_state_check_start   0x0000e4    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+         uart_state_start   0x0000e9    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+    uart_state_start_data   0x0000ee    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+uart_state_start_detected   0x0000f5    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+    uart_state_check_data   0x000100    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+          uart_state_data   0x000105    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+     uart_state_data_dmx1   0x000117    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+     uart_state_data_dmx2   0x000122    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+     uart_state_data_dmx3   0x00012d    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+      uart_state_data_inc   0x000138    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+    uart_state_data_noinc   0x00013c    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+    uart_state_data_frame   0x00014b    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+         uart_state_error   0x00014f    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+          uart_isr_return   0x000153    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+               timer_init   0x000154    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+                timer_isr   0x00016b    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+         timer_isr_setpwm   0x000183    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+         timer_isr_return   0x000184    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+               timer_zero   0x000185    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+                 pwm_init   0x000192    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+                  pwm_off   0x000199    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+                 pwm_sync   0x00019f    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+         pwm_set_channels   0x0001a3    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+      pwm_set_channels_ok   0x0001a7    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+                     boot   0x0001bc    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+                     main   0x0001cb    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+                    main2   0x0001cd    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+                   mainlp   0x0001d0    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+                   txloop   0x0001db    program     static /Users/bengm0ra/Projects/Home/DMX Lighting Board/DMX Lighting Board.X/dmxpack.asm
+
+
