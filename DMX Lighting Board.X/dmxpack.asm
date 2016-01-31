@@ -7,7 +7,7 @@
 ; circuits when connected to the DMX bus.
 ;
 ; Processor is PIC16F1508.  This receives the DMX stream, watches the zero-
-; crossing detector and feeds the Pulse With Modulation engines.
+; crossing detector and pulse width modulates the lights.
 ;
 ; Pin out for the chip is as follow:
 ;
@@ -56,22 +56,21 @@
 ;               get strobes for the entire cycle.  Note that the trigger is still
 ;               turned off in each level position, before being turned back on.
 
-; This is a prototype program to manage an illuminated encoder to be used in
-; the Tack Sa Mycket home we are building.  This is only a prototype since
-; the chip used here will likely be different than the chip in the final
-; keypad controller.
-;
-; A timer is set to trigger every 1ms.  This will read the encoder bits and
-; check the led pwm status.  LEDs can be set from 0-15 for their intensity.
-;
-; Need a little state machine to determine the direction of the encoder.
+; 31-Jan-2016 : Michel Bengtson : Version 1.1
+;		Fixed the light flicker issue. This was caused by a read-modify-
+;		write in the UART driver that was getting interference from the
+;		TIMER1 driver during an interrupt. There were also some writes
+;		to debug bits in Port C that were not going through LATC and
+;		this could have caused problems as well.
 
+; Set device type.
+	
 	list	p=16f1508
 	include <p16F1508.inc>
 
 ; Configuration bits are listed here.  There are two configuration words.
 ;
-; CONFIG1 : 0x00e2  : 0x0fa with watch dog timer.
+; CONFIG1 : 0x0fa with watch dog timer.
 ;
 ;       Bit 13    :   0 : Disable Fail Safe Clock Monitor
 ;       Bit 12    :   0 : Disable Internal/External Switch Over
@@ -83,7 +82,6 @@
 ;       Bit 07    :   1 : Disable Code Protection
 ;       Bit 06    :   1 : MCLR is Reset Signal
 ;       Bit 05    :   1 : Disable Power Up Timer
-;       Bit 04-03 :  00 : Disable Watch Dog Timer
 ;       Bit 04-03 :  11 : Enable Watch Dog Timer.
 ;       Bit 02-00 : 010 : HS Oscillator On OSC1 and OSC2
 ;
@@ -103,7 +101,7 @@
 
 ;  Define parameters about this device.
 DEVICE_TYPE_DMX_DEVICE	equ		002H
-DEVICE_VERSION_MINOR	equ		000H
+DEVICE_VERSION_MINOR	equ		001H
 DEVICE_VERSION_MAJOR	equ		001H
 
 ;  About the channel assignments ...
@@ -125,7 +123,8 @@ CHANNEL_ADDRESS_1           equ     .29
 CHANNEL_ADDRESS_2           equ     .30
 CHANNEL_ADDRESS_3           equ     .31
 
-;  Uncomment this table if the board needs to have it's channel map set.
+;  Uncomment this table if the board needs to have it's channel map set. Or set
+;  set the programmer to not write this section of code.
 
     org     0x20
 channel_address_table
@@ -139,7 +138,7 @@ CHANNEL_ADD_3_LOW   dw  CHANNEL_ADDRESS_3&0xff
 CHANNEL_ADD_3_HIGH  dw  CHANNEL_ADDRESS_3>>8
 
 ;  Define the locations in RAM necessary.  Valid RAM locations are 20-5F.
-;  Only 64 bytes to use them wisely.
+;  Only 64 bytes so use them wisely.
 
 ram		equ	0x20		; First address of available RAM
 
@@ -157,8 +156,9 @@ ram		equ	0x20		; First address of available RAM
 
 ;  Define all the variables used for this code.  These should fit between
 ;  0x20 and 0x7f.
-	cblock 0x20
-	endc
+    
+    cblock 0x20
+    endc
 
 ; ------------------------------------------------------------------------------
 ;
@@ -166,11 +166,11 @@ ram		equ	0x20		; First address of available RAM
 ;
 ;  Setup the reset and interrupt vectors for the chip.
 
-	org		0x00		; Set program memory base at reset vector 0x00.
-	goto	boot		; Go to boot code.
+    org	    0x00		; Set program memory base at reset vector 0x00.
+    goto    boot		; Go to boot code.
 
-	org		0x04
-	goto	system_isr			; Handle interrupts.
+    org	    0x04
+    goto    system_isr		; Handle interrupts.
 
 ;
 ; ------------------------------------------------------------------------------
@@ -231,7 +231,7 @@ system_start
 
 system_isr
 
-	call	timer_isr
+    call	timer_isr
     call    comparator_isr
 ;    call    uart_isr
 
@@ -268,9 +268,6 @@ dmx_init
     NOP                     ; Ignored (Figure 10-2)
     MOVF    PMDATL,W        ; Get LSB of word
     movwf   dmx_0_low
-;    MOVF    PMDATH,W        ; Get MSB of word
-;    MOVWF   PROG_DATA_HI    ; Store in user location
-;    BCF     PMCON1,RD
 
     MOVLW   0x21
     MOVWF   PMADRL          ; Store LSB of address
@@ -279,8 +276,6 @@ dmx_init
     NOP                     ; Ignored (Figure 10-2)
     MOVF    PMDATL,W        ; Get LSB of word
     movwf   dmx_0_high
-;    MOVF    PMDATH,W        ; Get MSB of word
-;    BCF     PMCON1,RD
 
     MOVLW   0x22
     MOVWF   PMADRL          ; Store LSB of address
@@ -329,23 +324,6 @@ dmx_init
     NOP                     ; Ignored (Figure 10-2)
     MOVF    PMDATL,W        ; Get LSB of word
     movwf   dmx_3_high
-
-;    movlw   LOW(CHANNEL_ADDRESS_0)
-;    movwf   dmx_0_low
-;    movlw   HIGH(CHANNEL_ADDRESS_0);
-;    movwf   dmx_0_high
-;    movlw   LOW(CHANNEL_ADDRESS_1)
-;    movwf   dmx_1_low
-;    movlw   HIGH(CHANNEL_ADDRESS_1);
-;    movwf   dmx_1_high
-;    movlw   LOW(CHANNEL_ADDRESS_2)
-;    movwf   dmx_2_low
-;    movlw   HIGH(CHANNEL_ADDRESS_2);
-;    movwf   dmx_2_high
-;    movlw   LOW(CHANNEL_ADDRESS_3)
-;    movwf   dmx_3_low
-;    movlw   HIGH(CHANNEL_ADDRESS_3);
-;    movwf   dmx_3_high
 
     ;  Return to the caller.
     return
@@ -421,25 +399,20 @@ comparator_init
 
 comparator_isr
 
+    ; Check for interrupt from a zero crossing. If not return, otherwise
+    ; clear the interrupt flag.
     banksel PIR2
     btfss   PIR2,C1IF
     return
 
     bcf     PIR2,C1IF
 
-    ;  Synchronize Timer 1 to AC line.
-
-;    banksel delay
-;    movlw   0x0F
-;    movwf   delay
-;comp_loop
-;    decfsz  delay,F
-;    goto    comp_loop
-
+    ;  Pulse RC6 to indicate the zero crossing detected.
     banksel LATC
     bsf     LATC,RC6
     bcf     LATC,RC6
 
+    ;  Resynchronize the PWM driver to the line frequency.
     call    pwm_sync
 
     ;  Return to the caller.
@@ -456,6 +429,10 @@ comparator_isr
 ;
 ;  This module handles the reception of the DMX data.  It is state machine
 ;  driven.  Data for the specified channels is saved in the RAM.
+;
+;  NOTE: This was originally interrupt driven but it caused some variation
+;  in the PWM to the SCRs. It is now called by main and consequently runs at
+;  a lower priority than the PWM.
 
 ;  Define variables for the timer 1 module.
 	cblock
@@ -508,13 +485,14 @@ uart_init
     bcf     LATC,RC4
 
     ;  Enable UART interrupts.
-    banksel PIE1
-;    bsf     PIE1,RCIE
+;    banksel PIE1
+;    bsf     PIE1,RCIE	    ; No longer running under interrupts.
 
     ;  Return to the caller.
     return;
 
-;  Routine - uart_isr : Handles an interrupt from the uart.
+;  Routine - uart_isr : Handles an interrupt from the uart. Now called from
+;  main instead of being interrupt driven.
 
 uart_isr
 
@@ -636,13 +614,9 @@ uart_state_data
     ;  We have a byte of data so read it and see if there is any more to read.
     movfw   RCREG
     banksel uart_data
-;    bcf     STATUS,C
     movwf   uart_data
-;    rrf     uart_data
-;    rrf     uart_data
 
     ;  See if we have a channel of data.
-    banksel uart_data
     movfw   uart_count_low
     xorwf   dmx_0_low,W
     btfss   STATUS,Z
@@ -655,10 +629,8 @@ uart_state_data
 
     ;  Move the data to the dmx0 slot.
     movfw   uart_data
-;    iorlw   0C0H
     xorlw   0FFH
-    movwf   dmx0
-;    comf    dmx0
+    movwf   dmx0		; Must be atomic operation!
 
 uart_state_data_dmx1
 
@@ -675,10 +647,8 @@ uart_state_data_dmx1
 
     ;  Move the data to the dmx0 slot.
     movfw   uart_data
-;    iorlw   0C0H
     xorlw   0FFH
-    movwf   dmx1
-;    comf    dmx1
+    movwf   dmx1		; Must be atomic operation!
 
 uart_state_data_dmx2
 
@@ -695,10 +665,8 @@ uart_state_data_dmx2
 
     ;  Move the data to the dmx0 slot.
     movfw   uart_data
-;    iorlw   0C0H
     xorlw   0FFH
-    movwf   dmx2
-;    comf    dmx2
+    movwf   dmx2		; Must be atomic operation!
 
 uart_state_data_dmx3
 
@@ -715,10 +683,8 @@ uart_state_data_dmx3
 
     ;  Move the data to the dmx0 slot.
     movfw   uart_data
-;    iorlw   0C0H
     xorlw   0FFH
-    movwf   dmx3
-;    comf    dmx3
+    movwf   dmx3		; Must be atomic operation!
 
 
 uart_state_data_inc
@@ -786,20 +752,31 @@ uart_isr_return
 ;  Timer 1 Module
 ;
 ;  This module handles the timing for the pwm of the channels.  It's resolution
-;  is set for 64 levels based on a 1/120 second period.  The timer will count
+;  is set for 256 levels based on a 1/120 second period.  The timer will count
 ;  until reset by the zero crossing detection.
 
 ;  Define variables for the timer 1 module.
 	cblock
-        level               ;  Holds the current level 0 to 63.
-;		mstimerh	;  High byte of millisceond timer.
-;        mstimertick ;  Bit 0 set if ms tick code should run.
+        level               ;  Holds the current level 0 to 255 in PWM cycle.
 	endc
-
-;  The reload value is 65536-2604 = 0F5D4H.  This will cause an interrupt on
-;  overflow every 1/120/64 seconds ... 130.2uS.  Based on 20Mhz oscillator.
-timer_reload_low	equ		0efH        ; 0F4 for 64 levels
-timer_reload_high	equ		0fDH        ; 0F5 for 64 levels
+;  The PWM period is 1/120 second or 8.333 ms. There are 256 positions in the
+;  PWM period so each position is 32.55 us. The timer needs to be set to
+;  generate interrupts at this rate or even just a little bit faster.
+;  There are 651 clocks in one PWM position, so 65536-651 = 64,885. In hex that
+;  is FD75. This would be the reload value under ideal conditions. Since the
+;  timer needs to be reloaded, there is some time that it takes. Also want to be
+;  just short of the next zero cross so that a light can run at full brightness
+;  with a 255 setting. Currently, the reload is set for FDEF. This is 529 clock
+;  cycles instead of 651. This is 6.1 us less than the 32.55us so a big
+;  difference. Do some testing.
+;
+;  Suprisingly, the 255 value with the FDEF timer setting produced 122.4 VAC.
+;  The input voltage to the board was 123.3 VAC so only 0.9 VAC less to the
+;  light that could be. It would still be nice to have a 255 value keep the
+;  triac trigger bit on all the time.
+	
+timer_reload_low	equ		0efH        ; 0EF for 256 levels
+timer_reload_high	equ		0fDH        ; 0FD for 256 levels
 
 ;  Routine - timer_init : Set up the timer to give us an interrupt every 1ms.
 ;  The isr code for this must be VERY lightweight.
@@ -807,28 +784,27 @@ timer_reload_high	equ		0fDH        ; 0F5 for 64 levels
 timer_init
 
     banksel T1CON
-    bsf     T1CON,TMR1CS0    ; Select internal clock.  System Clock.
+    bsf     T1CON,TMR1CS0	; Select internal clock.  System Clock.
     bcf     T1CON,TMR1CS1
-    bsf     T1CON,NOT_T1SYNC  ; Not required for internal clock.
-    bcf     T1CON,T1CKPS0   ; Prescaler 1:1
+    bsf     T1CON,NOT_T1SYNC	; Not required for internal clock.
+    bcf     T1CON,T1CKPS0	; Prescaler 1:1
     bcf     T1CON,T1CKPS1
 
     banksel T1GCON
     bcf     T1GCON,TMR1GE
 
- 	clrf	level
-;	clrf	mstimerh
+    clrf	level
 
     movlw   timer_reload_high
     movwf   TMR1H
     movlw   timer_reload_low
     movwf   TMR1L
 
-	bcf		PIR1,TMR1IF				;  Clear any pending interrupt.
-	banksel PIE1
-	bsf		PIE1,TMR1IE				;  Enable the interrupts
-	banksel T1CON
-	bsf		T1CON,TMR1ON			;  Start the timer.
+    bcf	    PIR1,TMR1IF		;  Clear any pending interrupt.
+    banksel PIE1
+    bsf	    PIE1,TMR1IE		;  Enable the interrupts
+    banksel T1CON
+    bsf	    T1CON,TMR1ON	;  Start the timer.
 
     ;  Setup the debug port, PORTC, pin 7.
     banksel TRISC
@@ -960,22 +936,6 @@ pwm_set_channels
 
     banksel dmx0
 
-;    movfw   level
-;    sublw   0x30
-;    btfsc   STATUS,C
-;    return
-;
-;    movfw   level
-;    sublw   0x0f
-;    btfss   STATUS,C
-;    return
-
-;    bcf     PORTC,RC5
-;    movfw   level
-;    xorlw   0x20
-;    btfss   STATUS,Z
-;    return
-
 ;  If the level is 255, don't bother turning on the triac.  This will allow
 ;  for an always off condition
 
@@ -1030,79 +990,25 @@ boot
     ;  Start the system.
     call    system_start
 
-    ;  For testing set up dmx channels.
-    movlw   0xc0
-    movwf   dmx0
-    movlw   0x80
-    movwf   dmx1
-    movlw   0x40
-    movwf   dmx2
-    movlw   0x00
-    movwf   dmx3
+    ;  For testing set up dmx channels. With out a DMX input, the channels
+    ;  will go to the test levels.
+    
+;    movlw   0xc0
+;    movwf   dmx0
+;    movlw   0x80
+;    movwf   dmx1
+;    movlw   0x40
+;    movwf   dmx2
+;    movlw   0x00
+;    movwf   dmx3
 
 
-    ;  Start of user code.
+    ;  Start of user code. Simply keep calling the UART driver. It's no longer
+    ;  interrupt driven.
+
 main
-
     call    uart_isr
     goto    main
-main2
-    goto    main2
-    banksel TRISC
- ;   bcf     TRISC,4
-    bcf     TRISC,5
-
-
-
-mainlp
-    banksel PORTC
-    bsf     PORTC,4
-    nop
-    nop
-    bcf     PORTC,4
-;    bcf     PORTC,5
-
-;    ;  Setup the serial port.
-;    banksel BAUDCON
-;    bcf     BAUDCON,SCKP    ;  Non inverting tx for async.
-;    bcf     BAUDCON,WUE     ; Wake up disabled.
-;    bcf     BAUDCON,ABDEN   ; Disable autobaud.
-
-    ;  Setup for transmission.
-    banksel BAUDCON
-    bcf     TXSTA,CSRC      ; Clock Source Select : Don't care for async.
-    bcf     TXSTA,TX9       ; Selects 8-bit transmissions.
-    bcf     TXSTA,SYNC      ; Selects Asynchronous mode.
-
-
-    ;  Setup the Baud Rate Generator for 250K baud.
-    banksel BAUDCON
-;    bcf     BAUDCON,BRG16
-;    bsf     TXSTA,BRGH
-;    clrf    SPBRGH
-;    movlw   0x04
-;    movwf   SPBRGL
-
-;    bsf     RCSTA,SPEN      ; Enables the serial ports.
-
-    ;  Get ready to send data.
-    bsf     TXSTA,TXEN      ;  Enable transmission.
-
-;    ;  Set receiver.
-;    bcf     RCSTA,RX9
-;    bsf     RCSTA,CREN      ; Enable reception.
-
-txloop
-
-    ;  See if we are ready to send data.
-    btfss   TXSTA,TRMT
-    goto    txloop
-
-    ;  Write data to the tx reg.
-    movlw   0x55
-    movwf   TXREG
-
-    goto    txloop
 
 ; End of main program.
 ;
