@@ -100,9 +100,9 @@
 	__CONFIG	_CONFIG2, 0x0803
 
 ;  Define parameters about this device.
-DEVICE_TYPE_DMX_DEVICE	equ		002H
-DEVICE_VERSION_MINOR	equ		001H
-DEVICE_VERSION_MAJOR	equ		001H
+DEVICE_TYPE_DMX_DEVICE	equ	002H
+DEVICE_VERSION_MINOR	equ	002H	    ; Version 1.2
+DEVICE_VERSION_MAJOR	equ	001H
 
 ;  About the channel assignments ...
 ;
@@ -118,10 +118,10 @@ DEVICE_VERSION_MAJOR	equ		001H
 ;  Define the DMX addresses for each channel.  These do not need to be
 ;  sequential and may be the same as in another DMX device.
 
-CHANNEL_ADDRESS_0           equ     .28
-CHANNEL_ADDRESS_1           equ     .29
-CHANNEL_ADDRESS_2           equ     .30
-CHANNEL_ADDRESS_3           equ     .31
+CHANNEL_ADDRESS_0           equ     .8
+CHANNEL_ADDRESS_1           equ     .9
+CHANNEL_ADDRESS_2           equ     .10
+CHANNEL_ADDRESS_3           equ     .11
 
 ;  Uncomment this table if the board needs to have it's channel map set. Or set
 ;  set the programmer to not write this section of code.
@@ -948,25 +948,25 @@ pwm_set_channels_ok
     btfss   STATUS,Z    ; If it's 0, then we are full on so always set the trigger.
     xorwf   level,W     ; If not 0, check to see if we are at the expected level.
     btfsc   STATUS,Z    ; If at level or at 0, then...
-    bsf     PORTC,RC5   ;    set the trigger.
+    bsf     LATC,RC5   ;    set the trigger.
 
     movfw   dmx1
     btfss   STATUS,Z
     xorwf   level,W
     btfsc   STATUS,Z
-    bsf     PORTC,RC3
+    bsf     LATC,RC3
 
     movfw   dmx2
     btfss   STATUS,Z
     xorwf   level,W
     btfsc   STATUS,Z
-    bsf     PORTA,RA2
+    bsf     LATA,RA2
 
     movfw   dmx3
     btfss   STATUS,Z
     xorwf   level,W
     btfsc   STATUS,Z
-    bsf     PORTC,RC1
+    bsf     LATC,RC1
 
     return
 

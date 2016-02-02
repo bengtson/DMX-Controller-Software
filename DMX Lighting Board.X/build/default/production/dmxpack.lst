@@ -1,4 +1,4 @@
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE  1
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00051 ;               it would sometimes trigger a full cycle, flashing like a
                       00052 ;               firefly.  Now, if the level is 0, the triac is never turned on.
                       00053 
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE  2
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -116,7 +116,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00094 ;       Bit 10    :   0 : Brown Out High Trip Point Selected (Not Used)
                       00095 ;       Bit 09    :   0 : Disable Stack Over/Underflow Reset
                       00096 ;       Bit 08-02 :   0 : Unimplemented  Reads as "1"
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE  3
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -128,9 +128,9 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 8008   0803           00100         __CONFIG        _CONFIG2, 0x0803
                       00101 
                       00102 ;  Define parameters about this device.
-  00000002            00103 DEVICE_TYPE_DMX_DEVICE  equ             002H
-  00000001            00104 DEVICE_VERSION_MINOR    equ             001H
-  00000001            00105 DEVICE_VERSION_MAJOR    equ             001H
+  00000002            00103 DEVICE_TYPE_DMX_DEVICE  equ     002H
+  00000002            00104 DEVICE_VERSION_MINOR    equ     002H        ; Version 1.2
+  00000001            00105 DEVICE_VERSION_MAJOR    equ     001H
                       00106 
                       00107 ;  About the channel assignments ...
                       00108 ;
@@ -146,23 +146,23 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00118 ;  Define the DMX addresses for each channel.  These do not need to be
                       00119 ;  sequential and may be the same as in another DMX device.
                       00120 
-  0000001C            00121 CHANNEL_ADDRESS_0           equ     .28
-  0000001D            00122 CHANNEL_ADDRESS_1           equ     .29
-  0000001E            00123 CHANNEL_ADDRESS_2           equ     .30
-  0000001F            00124 CHANNEL_ADDRESS_3           equ     .31
+  00000008            00121 CHANNEL_ADDRESS_0           equ     .8
+  00000009            00122 CHANNEL_ADDRESS_1           equ     .9
+  0000000A            00123 CHANNEL_ADDRESS_2           equ     .10
+  0000000B            00124 CHANNEL_ADDRESS_3           equ     .11
                       00125 
                       00126 ;  Uncomment this table if the board needs to have it's channel map set. Or set
                       00127 ;  set the programmer to not write this section of code.
                       00128 
                       00129     org     0x20
 0020                  00130 channel_address_table
-0020   001C           00131 CHANNEL_ADD_0_LOW   dw  CHANNEL_ADDRESS_0&0xff
+0020   0008           00131 CHANNEL_ADD_0_LOW   dw  CHANNEL_ADDRESS_0&0xff
 0021   0000           00132 CHANNEL_ADD_0_HIGH  dw  CHANNEL_ADDRESS_0>>8
-0022   001D           00133 CHANNEL_ADD_1_LOW   dw  CHANNEL_ADDRESS_1&0xff
+0022   0009           00133 CHANNEL_ADD_1_LOW   dw  CHANNEL_ADDRESS_1&0xff
 0023   0000           00134 CHANNEL_ADD_1_HIGH  dw  CHANNEL_ADDRESS_1>>8
-0024   001E           00135 CHANNEL_ADD_2_LOW   dw  CHANNEL_ADDRESS_2&0xff
+0024   000A           00135 CHANNEL_ADD_2_LOW   dw  CHANNEL_ADDRESS_2&0xff
 0025   0000           00136 CHANNEL_ADD_2_HIGH  dw  CHANNEL_ADDRESS_2>>8
-0026   001F           00137 CHANNEL_ADD_3_LOW   dw  CHANNEL_ADDRESS_3&0xff
+0026   000B           00137 CHANNEL_ADD_3_LOW   dw  CHANNEL_ADDRESS_3&0xff
 0027   0000           00138 CHANNEL_ADD_3_HIGH  dw  CHANNEL_ADDRESS_3>>8
                       00139 
                       00140 ;  Define the locations in RAM necessary.  Valid RAM locations are 20-5F.
@@ -175,7 +175,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
   00000070            00147         dmx_0_low
   00000071            00148         dmx_0_high
   00000072            00149         dmx_1_low
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE  4
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -234,7 +234,7 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
 0046   0021           00199     banksel OPTION_REG
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
 0047   1395           00200     bcf     OPTION_REG,NOT_WPUEN
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE  5
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -293,7 +293,7 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
                       00248 ;
                       00249 ; ------------------------------------------------------------------------------
                       00250 
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE  6
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE  6
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -352,7 +352,7 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
 0071   0091           00289     MOVWF   PMADRL          ; Store LSB of address
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
 0072   1415           00290     BSF     PMCON1,RD       ; Initiate read
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE  7
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE  7
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -411,7 +411,7 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
                       00328     ;  Return to the caller.
 0093   0008           00329     return
                       00330 
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE  8
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE  8
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -470,7 +470,7 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
 00A1   1792           00369     bsf     CM1CON1,C1INTP      ;  Interrupt on negative going edge.
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
 00A2   1312           00370     bcf     CM1CON1,C1INTN
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE  9
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE  9
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -529,7 +529,7 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
 00B7   0022           00411     banksel LATC
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
 00B8   170E           00412     bsf     LATC,RC6
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 10
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 10
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -588,7 +588,7 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
 00BD   109F           00461     bcf     BAUDCON,WUE     ; Wake up disabled.
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
 00BE   101F           00462     bcf     BAUDCON,ABDEN   ; Disable autobaud.
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 11
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 11
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -647,7 +647,7 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
                       00504     ;  Check for break state and handle.
 00D2   0020           00505     banksel uart_state
 00D3   0821           00506     movfw   uart_state
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 12
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 12
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -706,7 +706,7 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
                       00553 
 00E8                  00554 uart_state_start
                       00555 
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 13
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 13
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -765,7 +765,7 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
 00FF   0020           00599     banksel uart_state
 0100   0821           00600     movfw   uart_state
 0101   3A02           00601     xorlw   UART_STATE_DATA
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 14
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 14
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -824,7 +824,7 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
 011E   3AFF           00650     xorlw   0FFH
 011F   00A6           00651     movwf   dmx1                ; Must be atomic operation!
                       00652 
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 15
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 15
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -883,7 +883,7 @@ Message[305]: Using default destination of 1 (file).
 013C   1D03           00701     btfss   STATUS,Z
 013D   2???           00702     goto    uart_isr_return
                       00703 
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 16
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 16
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -942,7 +942,7 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
                       00746 ;
                       00747 ; ------------------------------------------------------------------------------
                       00748 
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 17
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 17
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1001,7 +1001,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 015C   0097           00799     movwf   TMR1H
 015D   30EF           00800     movlw   timer_reload_low
 015E   0096           00801     movwf   TMR1L
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 18
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 18
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1060,7 +1060,7 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
                       00847 
                       00848     ; Turn off all the triac drivers.
 017A   2???           00849     call    pwm_off
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 19
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 19
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1119,7 +1119,7 @@ Message[305]: Using default destination of 1 (file).
                       00898     ;  Set the PWM bits to be outputs.
 0190   0021           00899     banksel TRISA
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 20
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 20
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1178,7 +1178,7 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
 01A3   2???           00943     goto    pwm_set_channels_ok
 01A4   0008           00944     return
                       00945 
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 21
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 21
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1189,25 +1189,29 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 01A6   1D03           00948     btfss   STATUS,Z    ; If it's 0, then we are full on so always set the trigger.
 01A7   0629           00949     xorwf   level,W     ; If not 0, check to see if we are at the expected level.
 01A8   1903           00950     btfsc   STATUS,Z    ; If at level or at 0, then...
-01A9   168E           00951     bsf     PORTC,RC5   ;    set the trigger.
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+01A9   168E           00951     bsf     LATC,RC5   ;    set the trigger.
                       00952 
 01AA   0826           00953     movfw   dmx1
 01AB   1D03           00954     btfss   STATUS,Z
 01AC   0629           00955     xorwf   level,W
 01AD   1903           00956     btfsc   STATUS,Z
-01AE   158E           00957     bsf     PORTC,RC3
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+01AE   158E           00957     bsf     LATC,RC3
                       00958 
 01AF   0827           00959     movfw   dmx2
 01B0   1D03           00960     btfss   STATUS,Z
 01B1   0629           00961     xorwf   level,W
 01B2   1903           00962     btfsc   STATUS,Z
-01B3   150C           00963     bsf     PORTA,RA2
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+01B3   150C           00963     bsf     LATA,RA2
                       00964 
 01B4   0828           00965     movfw   dmx3
 01B5   1D03           00966     btfss   STATUS,Z
 01B6   0629           00967     xorwf   level,W
 01B7   1903           00968     btfsc   STATUS,Z
-01B8   148E           00969     bsf     PORTC,RC1
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+01B8   148E           00969     bsf     LATC,RC1
                       00970 
 01B9   0008           00971     return
                       00972 
@@ -1233,16 +1237,16 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00992 
                       00993     ;  For testing set up dmx channels. With out a DMX input, the channels
                       00994     ;  will go to the test levels.
-                      00995     
-                      00996 ;    movlw   0xc0
-                      00997 ;    movwf   dmx0
-                      00998 ;    movlw   0x80
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 22
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 22
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
+                      00995     
+                      00996 ;    movlw   0xc0
+                      00997 ;    movwf   dmx0
+                      00998 ;    movlw   0x80
                       00999 ;    movwf   dmx1
                       01000 ;    movlw   0x40
                       01001 ;    movwf   dmx2
@@ -1262,7 +1266,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       01015 ; ------------------------------------------------------------------------------
                       01016 
 00FA 0803             01017         end
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 23
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 23
 
 
 SYMBOL TABLE
@@ -1321,7 +1325,7 @@ BKA14                             00000006
 BKA2                              00000002
 BKA3                              00000003
 BKA4                              00000004
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 24
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 24
 
 
 SYMBOL TABLE
@@ -1380,7 +1384,7 @@ C2PCH0                            00000004
 C2PCH1                            00000005
 C2POL                             00000004
 C2SP                              00000002
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 25
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 25
 
 
 SYMBOL TABLE
@@ -1390,10 +1394,10 @@ C2SYNC                            00000000
 CDAFVR0                           00000002
 CDAFVR1                           00000003
 CFGS                              00000006
-CHANNEL_ADDRESS_0                 0000001C
-CHANNEL_ADDRESS_1                 0000001D
-CHANNEL_ADDRESS_2                 0000001E
-CHANNEL_ADDRESS_3                 0000001F
+CHANNEL_ADDRESS_0                 00000008
+CHANNEL_ADDRESS_1                 00000009
+CHANNEL_ADDRESS_2                 0000000A
+CHANNEL_ADDRESS_3                 0000000B
 CHANNEL_ADD_0_HIGH                00000021
 CHANNEL_ADD_0_LOW                 00000020
 CHANNEL_ADD_1_HIGH                00000023
@@ -1439,7 +1443,7 @@ CLC3IE                            00000002
 CLC3IF                            00000002
 CLC3POL                           00000F21
 CLC3SEL0                          00000F22
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 26
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 26
 
 
 SYMBOL TABLE
@@ -1498,7 +1502,7 @@ D3S1                              00000001
 D3S2                              00000002
 D3T                               00000005
 D4N                               00000006
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 27
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 27
 
 
 SYMBOL TABLE
@@ -1538,7 +1542,7 @@ DC                                00000001
 DC_SHAD                           00000001
 DEVICE_TYPE_DMX_DEVICE            00000002
 DEVICE_VERSION_MAJOR              00000001
-DEVICE_VERSION_MINOR              00000001
+DEVICE_VERSION_MINOR              00000002
 DEVSEL                            00000F95
 DEVSEL0                           00000000
 DEVSEL1                           00000001
@@ -1557,7 +1561,7 @@ FSR0L_SHAD                        00000FE8
 FSR1                              00000006
 FSR1H                             00000007
 FSR1H_SHAD                        00000FEB
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 28
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 28
 
 
 SYMBOL TABLE
@@ -1616,7 +1620,7 @@ ICDSTAT                           00000F91
 INBUG                             00000007
 INDF0                             00000000
 INDF1                             00000001
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 29
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 29
 
 
 SYMBOL TABLE
@@ -1675,7 +1679,7 @@ LATA2                             00000002
 LATA4                             00000004
 LATA5                             00000005
 LATB                              0000010D
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 30
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 30
 
 
 SYMBOL TABLE
@@ -1734,7 +1738,7 @@ LC1G3D2T                          00000003
 LC1G3D3N                          00000004
 LC1G3D3T                          00000005
 LC1G3D4N                          00000006
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 31
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 31
 
 
 SYMBOL TABLE
@@ -1793,7 +1797,7 @@ LC2G2POL                          00000001
 LC2G3D1N                          00000000
 LC2G3D1T                          00000001
 LC2G3D2N                          00000002
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 32
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 32
 
 
 SYMBOL TABLE
@@ -1852,7 +1856,7 @@ LC3G2D3N                          00000004
 LC3G2D3T                          00000005
 LC3G2D4N                          00000006
 LC3G2D4T                          00000007
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 33
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 33
 
 
 SYMBOL TABLE
@@ -1911,7 +1915,7 @@ LC4G2D1N                          00000000
 LC4G2D1T                          00000001
 LC4G2D2N                          00000002
 LC4G2D2T                          00000003
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 34
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 34
 
 
 SYMBOL TABLE
@@ -1970,7 +1974,7 @@ N1EN                              00000007
 N1OE                              00000006
 N1OUT                             00000005
 N1PFM                             00000000
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 35
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 35
 
 
 SYMBOL TABLE
@@ -2029,7 +2033,7 @@ NCO1INCH                          0000049C
 NCO1INCL                          0000049B
 NCO1INCU                          0000049D
 NCO1SEL                           00000000
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 36
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 36
 
 
 SYMBOL TABLE
@@ -2088,7 +2092,7 @@ PSA                               00000003
 PWM1CON                           00000613
 PWM1CON0                          00000613
 PWM1DCH                           00000612
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 37
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 37
 
 
 SYMBOL TABLE
@@ -2147,7 +2151,7 @@ PWM3OUT                           00000005
 PWM3POL                           00000004
 PWM4CON                           0000061C
 PWM4CON0                          0000061C
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 38
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 38
 
 
 SYMBOL TABLE
@@ -2206,7 +2210,7 @@ SBOREN                            00000007
 SCIE                              00000005
 SCKP                              00000004
 SCS0                              00000000
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 39
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 39
 
 
 SYMBOL TABLE
@@ -2265,7 +2269,7 @@ T1CON                             00000018
 T1GCON                            00000019
 T1GGO_NOT_DONE                    00000003
 T1GPOL                            00000006
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 40
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 40
 
 
 SYMBOL TABLE
@@ -2324,7 +2328,7 @@ TRISB5                            00000005
 TRISB6                            00000006
 TRISB7                            00000007
 TRISC                             0000008E
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 41
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 41
 
 
 SYMBOL TABLE
@@ -2383,7 +2387,7 @@ WR                                00000001
 WREG                              00000009
 WREG_SHAD                         00000FE5
 WREN                              00000002
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 42
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 42
 
 
 SYMBOL TABLE
@@ -2442,7 +2446,7 @@ _WRT_HALF                         00003FFD
 _WRT_OFF                          00003FFF
 __16F1508                         00000001
 boot                              000001BA
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 43
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 43
 
 
 SYMBOL TABLE
@@ -2501,7 +2505,7 @@ uart_state_data_dmx1              00000115
 uart_state_data_dmx2              00000120
 uart_state_data_dmx3              0000012B
 uart_state_data_frame             00000149
-MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   1-31-2016  14:23:14         PAGE 44
+MPASM 5.65  /USERS/BENGM0RA/PROJECTS/HOME/DM   2-1-2016  19:29:04         PAGE 44
 
 
 SYMBOL TABLE
@@ -2516,6 +2520,6 @@ uart_state_start_detected         000000F4
 
 Errors   :     0
 Warnings :     0 reported,     0 suppressed
-Messages :   105 reported,     0 suppressed
+Messages :   109 reported,     0 suppressed
 
 
